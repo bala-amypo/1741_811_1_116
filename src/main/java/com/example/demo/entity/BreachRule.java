@@ -1,28 +1,36 @@
 package com.example.demo.entity;
 
+import jakarta.persistence.*;
 import java.math.BigDecimal;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-
-
 
 @Entity
+@Table(name = "breach_rules")
 public class BreachRule {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    
+    @Column(name = "rule_name", nullable = false)
     private String ruleName;
+    
+    @Column(name = "penalty_per_day", precision = 10, scale = 2)
     private BigDecimal penaltyPerDay;
+    
+    @Column(name = "max_penalty_percentage")
     private Double maxPenaltyPercentage;
+    
+    @Column(name = "active")
     private Boolean active;
+    
+    @Column(name = "is_default_rule")
     private Boolean isDefaultRule;
 
-    public BreachRule(Long id, String ruleName, BigDecimal penaltyPerDay, Double maxPenaltyPercentage, Boolean active,
-            Boolean isDefaultRule) {
-        this.id = id;
+    public BreachRule() {
+    }
+
+    public BreachRule(String ruleName, BigDecimal penaltyPerDay, Double maxPenaltyPercentage, 
+                     Boolean active, Boolean isDefaultRule) {
         this.ruleName = ruleName;
         this.penaltyPerDay = penaltyPerDay;
         this.maxPenaltyPercentage = maxPenaltyPercentage;
@@ -77,5 +85,4 @@ public class BreachRule {
     public void setIsDefaultRule(Boolean isDefaultRule) {
         this.isDefaultRule = isDefaultRule;
     }
-
 }
