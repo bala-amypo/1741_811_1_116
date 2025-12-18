@@ -4,9 +4,17 @@ import java.math.BigDecimal;
 import java.sql.Date;
 import java.time.Instant;
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+
+
 
 @Entity
 public class Contract {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String contractNumber;
     private String title;
