@@ -5,15 +5,15 @@ import java.sql.Date;
 import java.time.Instant;
 
 public class Contract {
-    Long id;
-    String contractNumber;
-    String title;
-    String counterpartyName;
-    Date agreedDeliveryDate;
-    BigDecimal baseContractValue;
-    String status;
-    Instant createdAt;
-    Instant updatedAt;
+    private Long id;
+    private String contractNumber;
+    private String title;
+    private String counterpartyName;
+    private Date agreedDeliveryDate;
+    private BigDecimal baseContractValue;
+    private String status;
+    private Instant createdAt;
+    private Instant updatedAt;
 
     public Contract(Long id, String contractNumber, String title, String counterpartyName, Date agreedDeliveryDate,
             BigDecimal baseContractValue, String status, Instant createdAt, Instant updatedAt) {

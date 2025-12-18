@@ -4,11 +4,11 @@ import java.sql.Date;
 import java.time.Instant;
 
 public class DeliveryRecord {
-    Long id;
-    Contract contract;
-    Date deliveryDate;
-    String notes;
-    Instant createdAt;
+    private Long id;
+    private Contract contract;
+    private Date deliveryDate;
+    private String notes;
+    private Instant createdAt;
 
 
     public DeliveryRecord(Long id, Contract contract, Date deliveryDate, String notes, Instant createdAt) {
