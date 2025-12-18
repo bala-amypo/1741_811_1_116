@@ -5,7 +5,6 @@ import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "penalty_calculations")
 public class PenaltyCalculation {
     
     @Id
