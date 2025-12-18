@@ -12,7 +12,6 @@ public class DeliveryRecord {
     private Long id;
     
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "contract_id", nullable = false)
     private Contract contract;
     private LocalDate deliveryDate;
     private String notes;

@@ -13,7 +13,6 @@ public class PenaltyCalculation {
     private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "contract_id", nullable = false)
     private Contract contract;
     private Integer daysDelayed;
     private BigDecimal calculatedPenalty;
@@ -21,7 +20,7 @@ public class PenaltyCalculation {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "applied_rule_id")
     private BreachRule appliedRule;
-    
+
     private LocalDateTime calculatedAt;
 
     public PenaltyCalculation() {
