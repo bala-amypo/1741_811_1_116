@@ -2,7 +2,9 @@ package com.example.demo.entity;
 
 import java.sql.Date;
 import java.time.Instant;
+import jakarta.persistence.Entity;
 
+@Entity
 public class DeliveryRecord {
     private Long id;
     private Contract contract;

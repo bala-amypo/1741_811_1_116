@@ -1,7 +1,9 @@
 package com.example.demo.entity;
 
 import java.math.BigDecimal;
+import jakarta.persistence.Entity;
 
+@Entity
 public class BreachRule {
     private Long id;
     private String ruleName;

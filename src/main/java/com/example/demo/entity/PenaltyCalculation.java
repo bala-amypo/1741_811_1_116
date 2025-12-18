@@ -2,7 +2,9 @@ package com.example.demo.entity;
 
 import java.math.BigDecimal;
 import java.security.Timestamp;
+import jakarta.persistence.Entity;
 
+@Entity
 public class PenaltyCalculation {
     Long id;
     Contract contract;

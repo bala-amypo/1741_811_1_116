@@ -3,7 +3,9 @@ package com.example.demo.entity;
 import java.math.BigDecimal;
 import java.sql.Date;
 import java.time.Instant;
+import jakarta.persistence.Entity;
 
+@Entity
 public class Contract {
     private Long id;
     private String contractNumber;
