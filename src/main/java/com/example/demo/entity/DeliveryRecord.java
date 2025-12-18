@@ -25,11 +25,9 @@ public class DeliveryRecord {
     @Column(name = "created_at")
     private LocalDateTime createdAt;
 
-    // Default constructor (REQUIRED by JPA)
     public DeliveryRecord() {
     }
 
-    // Parameterized constructor
     public DeliveryRecord(Contract contract, LocalDate deliveryDate, String notes) {
         this.contract = contract;
         this.deliveryDate = deliveryDate;
@@ -37,15 +35,6 @@ public class DeliveryRecord {
         this.createdAt = LocalDateTime.now();
     }
 
-    // Pre-persist method
-    @PrePersist
-    protected void onCreate() {
-        if (createdAt == null) {
-            createdAt = LocalDateTime.now();
-        }
-    }
-
-    // Getters and Setters
     public Long getId() {
         return id;
     }

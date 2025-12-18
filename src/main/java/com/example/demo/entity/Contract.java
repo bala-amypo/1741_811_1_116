@@ -37,11 +37,9 @@ public class Contract {
     @Column(name = "updated_at")
     private LocalDateTime updatedAt;
 
-    // Default constructor (REQUIRED by JPA)
     public Contract() {
     }
 
-    // Parameterized constructor
     public Contract(String contractNumber, String title, String counterpartyName, 
                    LocalDate agreedDeliveryDate, BigDecimal baseContractValue, 
                    String status) {
@@ -55,19 +53,6 @@ public class Contract {
         this.updatedAt = LocalDateTime.now();
     }
 
-    // Pre-persist and pre-update methods
-    @PrePersist
-    protected void onCreate() {
-        createdAt = LocalDateTime.now();
-        updatedAt = LocalDateTime.now();
-    }
-
-    @PreUpdate
-    protected void onUpdate() {
-        updatedAt = LocalDateTime.now();
-    }
-
-    // Getters and Setters
     public Long getId() {
         return id;
     }

@@ -4,26 +4,20 @@ import jakarta.persistence.*;
 import java.math.BigDecimal;
 
 @Entity
-@Table(name = "breach_rules")
 public class BreachRule {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     
-    @Column(name = "rule_name", nullable = false)
     private String ruleName;
     
-    @Column(name = "penalty_per_day", precision = 10, scale = 2)
     private BigDecimal penaltyPerDay;
     
-    @Column(name = "max_penalty_percentage")
     private Double maxPenaltyPercentage;
     
-    @Column(name = "active")
     private Boolean active;
     
-    @Column(name = "is_default_rule")
     private Boolean isDefaultRule;
 
     public BreachRule() {

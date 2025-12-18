@@ -29,11 +29,9 @@ public class PenaltyCalculation {
     @Column(name = "calculated_at")
     private LocalDateTime calculatedAt;
 
-    // Default constructor (REQUIRED by JPA)
     public PenaltyCalculation() {
     }
 
-    // Parameterized constructor
     public PenaltyCalculation(Contract contract, Integer daysDelayed, 
                             BigDecimal calculatedPenalty, BreachRule appliedRule) {
         this.contract = contract;
@@ -43,15 +41,6 @@ public class PenaltyCalculation {
         this.calculatedAt = LocalDateTime.now();
     }
 
-    // Pre-persist method
-    @PrePersist
-    protected void onCreate() {
-        if (calculatedAt == null) {
-            calculatedAt = LocalDateTime.now();
-        }
-    }
-
-    // Getters and Setters
     public Long getId() {
         return id;
     }
