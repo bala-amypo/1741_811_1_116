@@ -14,6 +14,7 @@ public class Contract {
     
     @Column( unique = true)
     private String contractNumber;
+    
     private String title;
     private String counterpartyName;
     private LocalDate agreedDeliveryDate;
