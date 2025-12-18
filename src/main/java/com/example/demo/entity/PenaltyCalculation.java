@@ -11,22 +11,17 @@ public class PenaltyCalculation {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "contract_id", nullable = false)
     private Contract contract;
-    
-    @Column(name = "days_delayed")
     private Integer daysDelayed;
-    
-    @Column(name = "calculated_penalty", precision = 15, scale = 2)
     private BigDecimal calculatedPenalty;
     
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "applied_rule_id")
     private BreachRule appliedRule;
     
-    @Column(name = "calculated_at")
     private LocalDateTime calculatedAt;
 
     public PenaltyCalculation() {

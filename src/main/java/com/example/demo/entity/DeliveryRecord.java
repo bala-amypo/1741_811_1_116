@@ -5,7 +5,6 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "delivery_records")
 public class DeliveryRecord {
 
     @Id
@@ -15,14 +14,8 @@ public class DeliveryRecord {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "contract_id", nullable = false)
     private Contract contract;
-    
-    @Column(name = "delivery_date")
     private LocalDate deliveryDate;
-    
-    @Column(name = "notes", columnDefinition = "TEXT")
     private String notes;
-    
-    @Column(name = "created_at")
     private LocalDateTime createdAt;
 
     public DeliveryRecord() {

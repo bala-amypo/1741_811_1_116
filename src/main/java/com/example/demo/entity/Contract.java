@@ -6,35 +6,20 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "contracts")
 public class Contract {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     
-    @Column(name = "contract_number", nullable = false, unique = true)
+    @Column( unique = true)
     private String contractNumber;
-    
-    @Column(name = "title")
     private String title;
-    
-    @Column(name = "counterparty_name")
     private String counterpartyName;
-    
-    @Column(name = "agreed_delivery_date")
     private LocalDate agreedDeliveryDate;
-    
-    @Column(name = "base_contract_value", precision = 15, scale = 2)
     private BigDecimal baseContractValue;
-    
-    @Column(name = "status")
     private String status;
-    
-    @Column(name = "created_at")
     private LocalDateTime createdAt;
-    
-    @Column(name = "updated_at")
     private LocalDateTime updatedAt;
 
     public Contract() {
