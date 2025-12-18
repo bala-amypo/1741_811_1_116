@@ -12,13 +12,13 @@ public class PenaltyCalculation {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     private Contract contract;
+    
     private Integer daysDelayed;
     private BigDecimal calculatedPenalty;
     
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "applied_rule_id")
+    @ManyToOne
     private BreachRule appliedRule;
 
     private LocalDateTime calculatedAt;

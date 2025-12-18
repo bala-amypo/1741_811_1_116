@@ -11,8 +11,9 @@ public class DeliveryRecord {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     private Contract contract;
+    
     private LocalDate deliveryDate;
     private String notes;
     private LocalDateTime createdAt;
