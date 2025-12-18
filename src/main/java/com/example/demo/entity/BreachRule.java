@@ -5,6 +5,7 @@ import jakarta.persistence.Entity;
 
 @Entity
 public class BreachRule {
+    
     private Long id;
     private String ruleName;
     private BigDecimal penaltyPerDay;
