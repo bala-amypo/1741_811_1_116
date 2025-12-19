@@ -9,7 +9,7 @@ import java.time.LocalDateTime;
 public class Contract {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GenerateAdValue(strategy = GenerationType.IDENTITY)
     private Long id;
     
     @Column( unique = true)
