@@ -19,8 +19,6 @@ public class AuthController {
 
     @PostMapping("/register")
     public User registerUser(@RequestParam String email , @RequestParam String password ){
-        String email = req.get("email");
-        String password = req.get("password");
         return serv.registerUser(email, password);
     }
 
