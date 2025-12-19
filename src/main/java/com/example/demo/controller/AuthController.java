@@ -17,14 +17,14 @@ public class AuthController {
     @Autowired
     public UserService serv;
 
-    @PostMapping("/register/{id}")
+    @PostMapping("/register/{email}{password}")
     public User registerUser(@RequestBody Map<String , String> req ){
         String email = req.get("email");
         String password = req.get("password");
         return serv.registerUser(email, password);
     }
 
-    @PostMapping("/login")
+    @PostMapping("/login/{email}")
     public Optional<User> loginUser(@RequestBody String email ){
         return serv.getUserByEmail(email);
     }
