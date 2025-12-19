@@ -17,7 +17,7 @@ public class AuthController {
     @Autowired
     public UserService serv;
 
-    @PostMapping("/register")
+    @PostMapping("/register/{id}")
     public User registerUser(@RequestBody Map<String , String> req ){
         String email = req.get("email");
         String password = req.get("password");
