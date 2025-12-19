@@ -5,7 +5,7 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.demo.entity.User;
@@ -17,15 +17,15 @@ public class AuthController {
     @Autowired
     public UserService serv;
 
-    @PostMapping("/register/{email}{password}")
-    public User registerUser(@RequestBody Map<String , String> req ){
+    @PostMapping("/register")
+    public User registerUser(@RequestParam Map<String , String> req ){
         String email = req.get("email");
         String password = req.get("password");
         return serv.registerUser(email, password);
     }
 
-    @PostMapping("/login/{email}")
-    public Optional<User> loginUser(@RequestBody String email ){
+    @PostMapping("/login")
+    public Optional<User> loginUser(@RequestParam String email ){
         return serv.getUserByEmail(email);
     }
 }
