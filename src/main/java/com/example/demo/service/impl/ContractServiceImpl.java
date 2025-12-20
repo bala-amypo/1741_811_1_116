@@ -58,7 +58,7 @@ public class ContractServiceImpl implements ContractService{
         String stat;
 
         if(delivery == null ) stat = "ACTIVE";
-        else if (delivery.getDeliveryDate().isAfter(contract.getAgreedDeliveryDate())) stat = "Breached";
+        else if (delivery.getDeliveryDate().isAfter(contract.getAgreedDeliveryDate())) stat = "BREACHED";
         else stat = "COMPLETED";
 
         contract.setStatus(stat);
