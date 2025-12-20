@@ -6,6 +6,8 @@ import com.example.demo.entity.DeliveryRecord;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface DeliveryRecordRepository extends JpaRepository<DeliveryRecord , Long>{
+public interface DeliveryRecordrepository extends JpaRepository<DeliveryRecord , Long>{
+
+    DeliveryRecord findByContractId(Long contractId);
 
 }

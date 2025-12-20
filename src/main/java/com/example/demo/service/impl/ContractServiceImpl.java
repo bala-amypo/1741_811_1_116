@@ -7,7 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.example.demo.entity.Contract;
+import com.example.demo.entity.DeliveryRecord;
 import com.example.demo.repository.ContractRepository;
+import com.example.demo.repository.DeliveryRecordrepository;
 import com.example.demo.service.ContractService;
 
 @Service
@@ -15,6 +17,9 @@ public class ContractServiceImpl implements ContractService{
 
     @Autowired
     ContractRepository repo;
+
+    @Autowired
+    DeliveryRecordrepository deliver;
 
     @Override
     public Contract createContract(Contract contract){
@@ -48,7 +53,15 @@ public class ContractServiceImpl implements ContractService{
     @Override
     public Contract updateContractStatus(Long contractId){
         Contract contract = repo.findById(contractId).orElse(null);
-        contract.setStatus("COMPLETED");
+        DeliveryRecord delivery = deliver.findByContractId(contractId);
+
+        String stat;
+
+        if(delivery == null ) stat = "ACTIVE";
+        else if (delivery.getDeliveryDate().isAfter(contract.getAgreedDeliveryDate())) stat = "Breached";
+        else stat = "COMPLETED";
+
+        contract.setStatus(stat);
         contract.setUpdatedAt(LocalDateTime.now());
         return repo.save(contract);
     }
