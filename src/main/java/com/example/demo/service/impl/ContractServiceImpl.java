@@ -51,7 +51,7 @@ public class ContractServiceImpl implements ContractService{
     }
 
     @Override
-    public Contract updateContractStatus(Long contractId){
+    public String updateContractStatus(Long contractId){
         Contract contract = repo.findById(contractId).orElse(null);
         DeliveryRecord delivery = deliver.findByContractId(contractId);
 

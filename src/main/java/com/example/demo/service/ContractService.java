@@ -9,5 +9,5 @@ public interface ContractService {
     public Contract updateContract(Long id , Contract contract);
     public Contract getContractById(Long id);
     public List<Contract> getAllContracts();
-    public Contract updateContractStatus(Long contractId);
+    public String updateContractStatus(Long contractId);
 }
