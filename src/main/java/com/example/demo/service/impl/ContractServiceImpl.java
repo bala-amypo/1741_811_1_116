@@ -19,7 +19,7 @@ public class ContractServiceImpl implements ContractService{
     ContractRepository repo;
 
     @Autowired
-    DeliveryRecordrepository deliver;
+    DeliveryRecordRepository deliver;
 
     @Override
     public Contract createContract(Contract contract){
