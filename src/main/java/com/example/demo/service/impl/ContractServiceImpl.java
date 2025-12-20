@@ -63,6 +63,7 @@ public class ContractServiceImpl implements ContractService{
 
         contract.setStatus(stat);
         contract.setUpdatedAt(LocalDateTime.now());
-        return repo.save(contract);
+        repo.save(contract);
+        return stat;
     }
 }
