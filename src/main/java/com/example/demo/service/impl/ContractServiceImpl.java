@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 import com.example.demo.entity.Contract;
 import com.example.demo.entity.DeliveryRecord;
 import com.example.demo.repository.ContractRepository;
-import com.example.demo.repository.DeliveryRecordrepository;
+import com.example.demo.repository.DeliveryRecordRepository;
 import com.example.demo.service.ContractService;
 
 @Service
