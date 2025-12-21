@@ -12,9 +12,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-
-
 
 
 @RestController
@@ -33,7 +30,7 @@ public class ContractController {
     }
 
     @GetMapping("/api/contracts/{id}")
-    public Contract getContract(@RequestParam Long id) {
+    public Contract getContract(@PathVariable Long id) {
         return serv.getContractById(id);
     }
     

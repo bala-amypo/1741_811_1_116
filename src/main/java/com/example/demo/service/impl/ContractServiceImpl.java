@@ -23,8 +23,7 @@ public class ContractServiceImpl implements ContractService{
 
     @Override
     public Contract createContract(Contract contract){
-        repo.save(contract);
-        return contract;
+        return repo.save(contract);
     }
     @Override
     public Contract updateContract(Long id , Contract contract){
