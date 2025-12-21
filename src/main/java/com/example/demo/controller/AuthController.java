@@ -25,4 +25,5 @@ public class AuthController {
     public Optional<User> loginUser(@RequestParam String email ){
         return serv.getUserByEmail(email);
     }
+    
 }

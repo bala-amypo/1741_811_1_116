@@ -33,4 +33,5 @@ public class BreachReportController {
     public List<BreachReport> getAllReports() {
         return service.getAllReports();
     }
+    
 }
