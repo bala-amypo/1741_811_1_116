@@ -38,14 +38,13 @@ public class DeliveryRecordController {
     }
 
     @GetMapping("/api/delivery-records/contract/{contractId}")
-    public List<DeliveryRecord> getContractRecords(@PathVariable Long id) {
-        return service.getDeliveryRecordsForContracts(id);
+    public List<DeliveryRecord> getContractRecords(@PathVariable Long contractId) {
+        return service.getDeliveryRecordsForContracts(contractId);
     }
     
     @GetMapping("/api/delivery-records/contract/{contractId}/latest")
-    public DeliveryRecord getLatestRecord(@PathVariable Long id) {
-        return service.getLatestDeliveryRecord(id);
+    public DeliveryRecord getLatestRecord(@PathVariable Long contractId) {
+        return service.getLatestDeliveryRecord(contractId);
     }
-    
 
 }
