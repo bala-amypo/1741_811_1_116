@@ -10,4 +10,6 @@ public interface DeliveryRecordRepository extends JpaRepository<DeliveryRecord ,
 
     DeliveryRecord findByContractId(Long contractId);
 
+    DeliveryRecord findTopByContractIdOrderByDeliveryDateDesc(Long contractId);
+
 }
