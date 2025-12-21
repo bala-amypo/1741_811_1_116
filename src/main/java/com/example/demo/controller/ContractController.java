@@ -38,7 +38,7 @@ public class ContractController {
     }
     
     @GetMapping("/")
-    public List<Contract> getAll(@RequestParam String param) {
+    public List<Contract> getAll() {
         return serv.getAllContracts();
     }
     
