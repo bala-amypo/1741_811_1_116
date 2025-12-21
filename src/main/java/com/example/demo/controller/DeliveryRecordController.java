@@ -42,5 +42,10 @@ public class DeliveryRecordController {
         return service.getDeliveryRecordsForContracts(id);
     }
     
+    @GetMapping("/api/delivery-records/contract/{contractId}/latest")
+    public DeliveryRecord getLatestRecord(@PathVariable Long id) {
+        return service.getLatestDeliveryRecord(id);
+    }
+    
 
 }
