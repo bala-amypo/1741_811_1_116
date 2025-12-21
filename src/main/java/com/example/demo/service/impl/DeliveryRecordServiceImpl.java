@@ -33,7 +33,6 @@ public class DeliveryRecordServiceImpl implements DeliveryRecordService {
 
     @Override
     public DeliveryRecord getDeliveryRecordById(Long id) {
-        return repo.findById(id)
-                .orElse(null);
+        return repo.findById(id).orElse(null);
     }
 }
