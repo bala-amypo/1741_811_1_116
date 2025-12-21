@@ -2,6 +2,7 @@ package com.example.demo.service.impl;
 
 import java.math.BigDecimal;
 import java.time.temporal.ChronoUnit;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -37,44 +38,21 @@ public class PenaltyCalculationServiceImpl implements PenaltyCalculationService 
         Contract contract = contractRepository.findById(contractId).orElse(null);
         if (contract == null) return BigDecimal.ZERO;
 
-        DeliveryRecord deliveryRecord = deliveryRecordRepository.findTopByContractIdOrderByDeliveryDateDesc(contract.getId());
+        DeliveryRecord deliveryRecord = deliveryRecordRepository.findTopByContractIdOrderByDeliveryDateDesc(contractId);
+        if (deliveryRecord == null) return BigDecimal.ZERO;
 
-        if (deliveryRecord == null) {
-            return BigDecimal.ZERO;
-        }
+        BreachRule rule = breachRuleRepository.findFirstByActiveTrue();
+        if (rule == null) return BigDecimal.ZERO;
 
-        BreachRule rule =
-                breachRuleRepository
-                        .findAll()
-                        .stream()
-                        .filter(r -> Boolean.TRUE.equals(r.getActive()))
-                        .findFirst()
-                        .orElse(null);
+        long daysDelayed = ChronoUnit.DAYS.between(contract.getAgreedDeliveryDate(), deliveryRecord.getDeliveryDate());
+        if (daysDelayed <= 0) return BigDecimal.ZERO;
 
-        if (rule == null) {
-            return BigDecimal.ZERO;
-        }
+        BigDecimal penaltyByDays = rule.getPenaltyPerDay().multiply(BigDecimal.valueOf(daysDelayed));
+        BigDecimal maxPenalty = contract.getBaseContractValue().multiply(BigDecimal.valueOf(rule.getMaxPenaltyPercentage())).divide(BigDecimal.valueOf(100));
 
-        long daysDelayed =
-                ChronoUnit.DAYS.between(
-                        contract.getAgreedDeliveryDate(),
-                        deliveryRecord.getDeliveryDate()
-                );
-
-        if (daysDelayed <= 0) {
-            return BigDecimal.ZERO;
-        }
-
-        BigDecimal penaltyByDays =
-                rule.getPenaltyPerDay()
-                        .multiply(BigDecimal.valueOf(daysDelayed));
-
-        BigDecimal maxPenalty =
-                contract.getBaseContractValue()
-                        .multiply(BigDecimal.valueOf(rule.getMaxPenaltyPercentage()))
-                        .divide(BigDecimal.valueOf(100));
-
-        BigDecimal finalPenalty = penaltyByDays.min(maxPenalty);
+        BigDecimal finalPenalty;
+        if (penaltyByDays.compareTo(maxPenalty) > 0) finalPenalty = maxPenalty;
+        else finalPenalty = penaltyByDays;
 
         PenaltyCalculation calculation = new PenaltyCalculation();
         calculation.setContract(contract);
@@ -83,7 +61,6 @@ public class PenaltyCalculationServiceImpl implements PenaltyCalculationService 
         calculation.setAppliedRule(rule);
 
         penaltyCalculationRepository.save(calculation);
-
         return finalPenalty;
     }
 
@@ -95,11 +72,9 @@ public class PenaltyCalculationServiceImpl implements PenaltyCalculationService 
     @Override
     public BigDecimal getCalculationsForContract(Long contractId) {
 
-        return penaltyCalculationRepository.findAll()
-                .stream()
-                .filter(c -> c.getContract() != null)
-                .filter(c -> c.getContract().getId().equals(contractId))
-                .map(PenaltyCalculation::getCalculatedPenalty)
-                .reduce(BigDecimal.ZERO, BigDecimal::add);
+        BigDecimal total = BigDecimal.ZERO;
+        List<PenaltyCalculation> list = penaltyCalculationRepository.findByContractId(contractId);
+        for (PenaltyCalculation c : list) total = total.add(c.getCalculatedPenalty());
+        return total;
     }
 }
