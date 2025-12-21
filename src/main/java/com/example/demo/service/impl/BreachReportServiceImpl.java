@@ -35,25 +35,36 @@ public class BreachReportServiceImpl implements BreachReportService {
     @Override
     public BreachReport generateReport(Long contractId) {
         Contract contract = contractRepo.findById(contractId).orElse(null);
-        if(contract == null) return null;
+        if (contract == null) return null;
 
         DeliveryRecord latestDelivery = deliveryRepo.findTopByContractIdOrderByDeliveryDateDesc(contractId);
-        if(latestDelivery == null) return null;
+        if (latestDelivery == null) return null;
 
         int daysDelayed = (int) java.time.temporal.ChronoUnit.DAYS.between(
                 contract.getAgreedDeliveryDate(), latestDelivery.getDeliveryDate());
-        if(daysDelayed < 0) daysDelayed = 0;
+        if (daysDelayed < 0) daysDelayed = 0;
 
-        BreachRule rule = ruleRepo.findAll().stream()
-                            .filter(r -> r.getActive() && r.getIsDefaultRule())
-                            .findFirst()
-                            .orElse(null);
-        if(rule == null) return null;
+        // Prefer active + default rule, then any active rule, then any rule as a fallback
+        var rules = ruleRepo.findAll();
+        BreachRule rule = rules.stream()
+                .filter(r -> Boolean.TRUE.equals(r.getActive()) && Boolean.TRUE.equals(r.getIsDefaultRule()))
+                .findFirst()
+                .orElseGet(() -> rules.stream()
+                        .filter(r -> Boolean.TRUE.equals(r.getActive()))
+                        .findFirst()
+                        .orElseGet(() -> rules.stream().findFirst().orElse(null)));
 
-        BigDecimal penalty = rule.getPenaltyPerDay().multiply(BigDecimal.valueOf(daysDelayed));
-        BigDecimal maxPenalty = contract.getBaseContractValue()
-                                .multiply(BigDecimal.valueOf(rule.getMaxPenaltyPercentage()/100));
-        if(penalty.compareTo(maxPenalty) > 0) penalty = maxPenalty;
+        if (rule == null) return null;
+
+        BigDecimal penaltyPerDay = rule.getPenaltyPerDay() == null ? BigDecimal.ZERO : rule.getPenaltyPerDay();
+        BigDecimal penalty = penaltyPerDay.multiply(BigDecimal.valueOf(daysDelayed));
+
+        BigDecimal maxPenalty = BigDecimal.ZERO;
+        if (contract.getBaseContractValue() != null && rule.getMaxPenaltyPercentage() != null) {
+            maxPenalty = contract.getBaseContractValue()
+                    .multiply(BigDecimal.valueOf(rule.getMaxPenaltyPercentage() / 100.0));
+            if (penalty.compareTo(maxPenalty) > 0) penalty = maxPenalty;
+        }
 
         BreachReport report = new BreachReport();
         report.setContract(contract);
