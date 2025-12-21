@@ -22,27 +22,27 @@ public class ContractController {
     @Autowired
     ContractService serv;
 
-    @PostMapping("/")
+    @PostMapping("/api/contracts/")
     public Contract createContract(@RequestBody Contract entity) {
         return serv.createContract(entity);
     }
 
-    @PutMapping("/{id}")
+    @PutMapping("/api/contracts/{id}")
     public Contract putContract(@PathVariable Long id, @RequestBody Contract contract) {
         return serv.updateContract(id, contract);
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/api/contracts/{id}")
     public Contract getContract(@RequestParam Long id) {
         return serv.getContractById(id);
     }
     
-    @GetMapping("/")
-    public List<Contract> getAll() {
+    @GetMapping("/api/contracts/")
+    public List<Contract> getAll(@RequestParam String param) {
         return serv.getAllContracts();
     }
     
-    @PutMapping("/{id}/update-status")
+    @PutMapping("/api/contracts/{id}/update-status")
     public String updateStatus(@PathVariable Long id) {
         return serv.updateContractStatus(id);
     }
