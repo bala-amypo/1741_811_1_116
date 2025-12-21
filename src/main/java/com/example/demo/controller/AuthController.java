@@ -1,6 +1,5 @@
 package com.example.demo.controller;
 
-import java.util.Map;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,9 +17,7 @@ public class AuthController {
     public UserService serv;
 
     @PostMapping("/auth/register")
-    public User registerUser(@RequestParam String email , @RequestParm String password ){
-        String email = req.get("email");
-        String password = req.get("password");
+    public User registerUser(@RequestParam String email , @RequestParam String password){
         return serv.registerUser(email, password);
     }
 
