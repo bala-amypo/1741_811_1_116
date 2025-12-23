@@ -26,9 +26,7 @@ public class Contract {
     public Contract() {
     }
 
-    public Contract(String contractNumber, String title, String counterpartyName, 
-                   LocalDate agreedDeliveryDate, BigDecimal baseContractValue, 
-                   String status) {
+    public Contract(String contractNumber, String title, String counterpartyName, LocalDate agreedDeliveryDate, BigDecimal baseContractValue, String status) {
         this.contractNumber = contractNumber;
         this.title = title;
         this.counterpartyName = counterpartyName;
