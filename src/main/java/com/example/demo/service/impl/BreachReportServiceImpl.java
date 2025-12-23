@@ -40,12 +40,11 @@ public class BreachReportServiceImpl implements BreachReportService {
         DeliveryRecord latestDelivery = deliveryRepo.findTopByContractIdOrderByDeliveryDateDesc(contractId);
         if (latestDelivery == null) return null;
 
-        int daysDelayed = (int) java.time.temporal.ChronoUnit.DAYS.between(
-                contract.getAgreedDeliveryDate(), latestDelivery.getDeliveryDate());
+        int daysDelayed = (int) java.time.temporal.ChronoUnit.DAYS.between(contract.getAgreedDeliveryDate(), latestDelivery.getDeliveryDate());
         if (daysDelayed < 0) daysDelayed = 0;
 
-        // Prefer active + default rule, then any active rule, then any rule as a fallback
         var rules = ruleRepo.findAll();
+        
         BreachRule rule = rules.stream()
                 .filter(r -> Boolean.TRUE.equals(r.getActive()) && Boolean.TRUE.equals(r.getIsDefaultRule()))
                 .findFirst()
