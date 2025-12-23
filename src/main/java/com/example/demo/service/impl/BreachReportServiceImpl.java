@@ -44,14 +44,14 @@ public class BreachReportServiceImpl implements BreachReportService {
         if (daysDelayed < 0) daysDelayed = 0;
 
         var rules = ruleRepo.findAll();
-        
+
         BreachRule rule = rules.stream()
                 .filter(r -> Boolean.TRUE.equals(r.getActive()) && Boolean.TRUE.equals(r.getIsDefaultRule()))
                 .findFirst()
                 .orElseGet(() -> rules.stream()
-                        .filter(r -> Boolean.TRUE.equals(r.getActive()))
-                        .findFirst()
-                        .orElseGet(() -> rules.stream().findFirst().orElse(null)));
+                .filter(r -> Boolean.TRUE.equals(r.getActive()))
+                .findFirst()
+                .orElseGet(() -> rules.stream().findFirst().orElse(null)));
 
         if (rule == null) return null;
 
