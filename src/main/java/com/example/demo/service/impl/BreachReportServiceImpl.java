@@ -60,8 +60,7 @@ public class BreachReportServiceImpl implements BreachReportService {
 
         BigDecimal maxPenalty = BigDecimal.ZERO;
         if (contract.getBaseContractValue() != null && rule.getMaxPenaltyPercentage() != null) {
-            maxPenalty = contract.getBaseContractValue()
-                    .multiply(BigDecimal.valueOf(rule.getMaxPenaltyPercentage() / 100.0));
+            maxPenalty = contract.getBaseContractValue().multiply(BigDecimal.valueOf(rule.getMaxPenaltyPercentage() / 100.0));
             if (penalty.compareTo(maxPenalty) > 0) penalty = maxPenalty;
         }
 
