@@ -9,4 +9,5 @@ public interface DeliveryRecordService {
     public List<DeliveryRecord> getDeliveryRecordsForContracts(Long contractId);
     public DeliveryRecord getLatestDeliveryRecord(Long contractId);
     public DeliveryRecord getDeliveryRecordById(Long id);
+    public DeliveryRecord getRecordById(Long id);
 }

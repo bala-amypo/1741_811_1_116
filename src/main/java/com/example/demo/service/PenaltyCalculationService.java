@@ -1,11 +1,9 @@
 package com.example.demo.service;
 
-import java.math.BigDecimal;
-
 import com.example.demo.entity.PenaltyCalculation;
 
 public interface PenaltyCalculationService {
-    public BigDecimal calculatePenalty(Long contractId);
-    public PenaltyCalculation getCalculationbyId(Long id);
-    public BigDecimal getCalculationsForContract(Long contractId);
+    public PenaltyCalculation calculatePenalty(Long contractId);
+    public PenaltyCalculation getCalculationById(Long id);
+    public java.util.List<PenaltyCalculation> getCalculationsForContract(Long contractId);
 }
