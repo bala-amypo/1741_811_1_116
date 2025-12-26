@@ -67,4 +67,27 @@ public class DeliveryRecord {
     public void setCreatedAt(LocalDateTime createdAt) {
         this.createdAt = createdAt;
     }
+
+    public static Builder builder() { return new Builder(); }
+
+    public static class Builder {
+        private Long id;
+        private Contract contract;
+        private LocalDate deliveryDate;
+        private String notes;
+
+        public Builder id(Long id) { this.id = id; return this; }
+        public Builder contract(Contract contract) { this.contract = contract; return this; }
+        public Builder deliveryDate(LocalDate deliveryDate) { this.deliveryDate = deliveryDate; return this; }
+        public Builder notes(String notes) { this.notes = notes; return this; }
+
+        public DeliveryRecord build() {
+            DeliveryRecord r = new DeliveryRecord();
+            r.setId(this.id);
+            r.setContract(this.contract);
+            r.setDeliveryDate(this.deliveryDate);
+            r.setNotes(this.notes);
+            return r;
+        }
+    }
 }

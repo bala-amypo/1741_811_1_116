@@ -72,4 +72,30 @@ public class User {
         this.createdAt = createdAt;
     }
     
+    public static Builder builder() { return new Builder(); }
+
+    public static class Builder {
+        private Long id;
+        private String email;
+        private String password;
+        private Set<String> roles;
+        private LocalDateTime createdAt;
+
+        public Builder id(Long id) { this.id = id; return this; }
+        public Builder email(String email) { this.email = email; return this; }
+        public Builder password(String password) { this.password = password; return this; }
+        public Builder roles(Set<String> roles) { this.roles = roles; return this; }
+        public Builder createdAt(LocalDateTime createdAt) { this.createdAt = createdAt; return this; }
+
+        public User build() {
+            User u = new User();
+            u.setId(this.id);
+            u.setEmail(this.email);
+            u.setPassword(this.password);
+            u.setRoles(this.roles);
+            u.setCreatedAt(this.createdAt);
+            return u;
+        }
+    }
+    
 }
