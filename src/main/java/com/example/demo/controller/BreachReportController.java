@@ -4,7 +4,6 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.transaction.annotation.Transactional;
 
 import com.example.demo.entity.BreachReport;
 import com.example.demo.service.BreachReportService;
@@ -15,7 +14,6 @@ public class BreachReportController {
     @Autowired
     BreachReportService service;
 
-    @Transactional
     @PostMapping("/api/reports/generate/{contractId}")
     public BreachReport generateReport(@PathVariable Long contractId) {
         return service.generateReport(contractId);
@@ -27,7 +25,7 @@ public class BreachReportController {
     }
 
     @GetMapping("/api/reports/contract/{contractId}")
-    public BreachReport getReportsForContract(@PathVariable Long contractId) {
+    public java.util.List<BreachReport> getReportsForContract(@PathVariable Long contractId) {
         return service.getReportsForContract(contractId);
     }
 
@@ -35,5 +33,4 @@ public class BreachReportController {
     public List<BreachReport> getAllReports() {
         return service.getAllReports();
     }
-    
 }

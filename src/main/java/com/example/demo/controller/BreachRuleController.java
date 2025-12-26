@@ -4,7 +4,6 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.transaction.annotation.Transactional;
 
 import com.example.demo.entity.BreachRule;
 import com.example.demo.service.BreachRuleService;
@@ -21,13 +20,11 @@ public class BreachRuleController {
     BreachRuleService serv;
 
     @PostMapping("/api/breach-rules")
-    @Transactional
     public BreachRule createRule(@RequestBody BreachRule entity) {
         return serv.createRule(entity);
     }
     
     @PutMapping("/api/breach-rules/{id}")
-    @Transactional
     public BreachRule updateRule(@PathVariable Long id, @RequestBody BreachRule entity) {
         return serv.updateRule(id, entity);
     }
@@ -43,7 +40,6 @@ public class BreachRuleController {
     }
     
     @PutMapping("/api/breach-rules/{id}/deactivate")
-    @Transactional
     public BreachRule deactivateRuleById(@PathVariable Long id) {
         return serv.deactivateRule(id);
     }
