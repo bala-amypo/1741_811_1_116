@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.example.demo.entity.BreachRule;
 import com.example.demo.service.BreachRuleService;
@@ -19,6 +20,7 @@ public class BreachRuleController {
     @Autowired
     BreachRuleService serv;
 
+    @
     @PostMapping("/api/breach-rules")
     public BreachRule createRule(@RequestBody BreachRule entity) {
         return serv.createRule(entity);
