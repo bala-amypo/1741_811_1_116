@@ -20,13 +20,14 @@ public class BreachRuleController {
     @Autowired
     BreachRuleService serv;
 
-    @
     @PostMapping("/api/breach-rules")
+    @Transactional
     public BreachRule createRule(@RequestBody BreachRule entity) {
         return serv.createRule(entity);
     }
     
     @PutMapping("/api/breach-rules/{id}")
+    @Transactional
     public BreachRule updateRule(@PathVariable Long id, @RequestBody BreachRule entity) {
         return serv.updateRule(id, entity);
     }
@@ -42,6 +43,7 @@ public class BreachRuleController {
     }
     
     @PutMapping("/api/breach-rules/{id}/deactivate")
+    @Transactional
     public BreachRule deactivateRuleById(@PathVariable Long id) {
         return serv.deactivateRule(id);
     }
