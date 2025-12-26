@@ -10,5 +10,6 @@ public interface BreachRuleService {
     public List<BreachRule> getAllRules();
     public BreachRule getRuleById(Long Id);
     public BreachRule deactivateRule(Long id);
+    public BreachRule getActiveDefaultOrFirst();
     // public BreachRule getActiveDefaultOrFirst();
 }
