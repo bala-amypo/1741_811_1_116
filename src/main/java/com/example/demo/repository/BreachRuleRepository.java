@@ -9,4 +9,6 @@ import com.example.demo.entity.BreachRule;
 public interface BreachRuleRepository extends JpaRepository<BreachRule, Long> {
     
     BreachRule findFirstByActiveTrue();
+
+    java.util.Optional<BreachRule> findFirstByActiveTrueOrderByIsDefaultRuleDesc();
 }

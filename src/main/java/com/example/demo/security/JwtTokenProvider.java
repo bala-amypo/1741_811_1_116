@@ -39,7 +39,9 @@ public class JwtTokenProvider {
             if (parts.length >= 1) m.put("userId", Long.parseLong(parts[0]));
             if (parts.length >= 2) m.put("email", parts[1]);
             if (parts.length >= 3) m.put("roles", parts[2]);
-        } catch (Exception e) {}
+        } catch (Exception e) {
+            // return empty map on error
+        }
         return m;
     }
 
