@@ -26,7 +26,9 @@ public class Contract {
     public Contract() {
     }
 
-    public Contract(String contractNumber, String title, String counterpartyName, LocalDate agreedDeliveryDate, BigDecimal baseContractValue, String status) {
+    public Contract(String contractNumber, String title, String counterpartyName, 
+                   LocalDate agreedDeliveryDate, BigDecimal baseContractValue, 
+                   String status) {
         this.contractNumber = contractNumber;
         this.title = title;
         this.counterpartyName = counterpartyName;
@@ -107,5 +109,39 @@ public class Contract {
 
     public void setUpdatedAt(LocalDateTime updatedAt) {
         this.updatedAt = updatedAt;
+    }
+
+    public static Builder builder() {
+        return new Builder();
+    }
+
+    public static class Builder {
+        private Long id;
+        private String contractNumber;
+        private String title;
+        private String counterpartyName;
+        private LocalDate agreedDeliveryDate;
+        private BigDecimal baseContractValue;
+        private String status;
+
+        public Builder id(Long id) { this.id = id; return this; }
+        public Builder contractNumber(String contractNumber) { this.contractNumber = contractNumber; return this; }
+        public Builder title(String title) { this.title = title; return this; }
+        public Builder counterpartyName(String counterpartyName) { this.counterpartyName = counterpartyName; return this; }
+        public Builder agreedDeliveryDate(LocalDate agreedDeliveryDate) { this.agreedDeliveryDate = agreedDeliveryDate; return this; }
+        public Builder baseContractValue(BigDecimal baseContractValue) { this.baseContractValue = baseContractValue; return this; }
+        public Builder status(String status) { this.status = status; return this; }
+
+        public Contract build() {
+            Contract c = new Contract();
+            c.setId(this.id);
+            c.setContractNumber(this.contractNumber);
+            c.setTitle(this.title);
+            c.setCounterpartyName(this.counterpartyName);
+            c.setAgreedDeliveryDate(this.agreedDeliveryDate);
+            c.setBaseContractValue(this.baseContractValue);
+            c.setStatus(this.status);
+            return c;
+        }
     }
 }
