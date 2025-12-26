@@ -77,4 +77,33 @@ public class BreachRule {
     public void setIsDefaultRule(Boolean isDefaultRule) {
         this.isDefaultRule = isDefaultRule;
     }
+
+    public static Builder builder() { return new Builder(); }
+
+    public static class Builder {
+        private Long id;
+        private String ruleName;
+        private java.math.BigDecimal penaltyPerDay;
+        private Double maxPenaltyPercentage;
+        private Boolean active;
+        private Boolean isDefaultRule;
+
+        public Builder id(Long id) { this.id = id; return this; }
+        public Builder ruleName(String ruleName) { this.ruleName = ruleName; return this; }
+        public Builder penaltyPerDay(java.math.BigDecimal penaltyPerDay) { this.penaltyPerDay = penaltyPerDay; return this; }
+        public Builder maxPenaltyPercentage(Double maxPenaltyPercentage) { this.maxPenaltyPercentage = maxPenaltyPercentage; return this; }
+        public Builder active(Boolean active) { this.active = active; return this; }
+        public Builder isDefaultRule(Boolean isDefaultRule) { this.isDefaultRule = isDefaultRule; return this; }
+
+        public BreachRule build() {
+            BreachRule b = new BreachRule();
+            b.setId(this.id);
+            b.setRuleName(this.ruleName);
+            b.setPenaltyPerDay(this.penaltyPerDay);
+            b.setMaxPenaltyPercentage(this.maxPenaltyPercentage);
+            b.setActive(this.active);
+            b.setIsDefaultRule(this.isDefaultRule);
+            return b;
+        }
+    }
 }

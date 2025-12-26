@@ -83,4 +83,33 @@ public class BreachReport {
     public void setRemarks(String remarks) {
         this.remarks = remarks;
     }
+
+    public static Builder builder() { return new Builder(); }
+
+    public static class Builder {
+        private Long id;
+        private Contract contract;
+        private java.time.LocalDateTime reportGeneratedAt;
+        private Integer daysDelayed;
+        private java.math.BigDecimal penaltyAmount;
+        private String remarks;
+
+        public Builder id(Long id) { this.id = id; return this; }
+        public Builder contract(Contract contract) { this.contract = contract; return this; }
+        public Builder reportGeneratedAt(java.time.LocalDateTime reportGeneratedAt) { this.reportGeneratedAt = reportGeneratedAt; return this; }
+        public Builder daysDelayed(Integer daysDelayed) { this.daysDelayed = daysDelayed; return this; }
+        public Builder penaltyAmount(java.math.BigDecimal penaltyAmount) { this.penaltyAmount = penaltyAmount; return this; }
+        public Builder remarks(String remarks) { this.remarks = remarks; return this; }
+
+        public BreachReport build() {
+            BreachReport r = new BreachReport();
+            r.setId(this.id);
+            r.setContract(this.contract);
+            r.setReportGeneratedAt(this.reportGeneratedAt);
+            r.setDaysDelayed(this.daysDelayed);
+            r.setPenaltyAmount(this.penaltyAmount);
+            r.setRemarks(this.remarks);
+            return r;
+        }
+    }
 }
